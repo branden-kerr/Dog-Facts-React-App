@@ -1,7 +1,6 @@
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { FirebaseAppProvider } from 'reactfire';
 import 'firebase/auth';
 
@@ -21,7 +20,4 @@ ReactDOM.render(
   </FirebaseAppProvider>,
   document.getElementById('root')
 );
-
-
-reportWebVitals();
 
