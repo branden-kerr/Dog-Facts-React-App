@@ -1,12 +1,10 @@
-import React, { useState, useEffect, MouseEvent } from 'react';
+import { useState, } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Collapse } from '@material-ui/core';
-import Axios from 'axios';
 import Button from '@material-ui/core/Button';
 import { useFirestore, useFirestoreDocData } from 'reactfire';
 
@@ -44,36 +42,20 @@ const useStyles = makeStyles((Theme) => createStyles({
     fontWeight: 900,
     fontFamily: "Nunito",
     textShadow: "-.5px -.5px 0 #000, .5px -.5px 0 #000, -.5px .5px 0 #000, .5px .5px 0 #000",
-    // border: "3px solid orange"
   }
 }));
 
-
-// const getRandomDogFact = () => {
-//   return Axios.get("https://dog-facts-api.herokuapp.com/api/v1/resources/dogs?number=1").then(
-//     (response) => {
-//       return response.data[0].fact;
-//     }
-//   )
-// }
-export default function ImageCard({ place, checked }: { place: any, checked: any }) {
-
+export default function ImageCard({ checked }: { checked: any }) {
   const classes = useStyles();
-
   const dogCollection = useFirestore()
     .collection('tryreactfire')
-    .doc('burrito');
-
-  const { status, data }: { status: any; data: any } = useFirestoreDocData(dogCollection);
-
+    .doc('dogs');
+  const { data }: { data: any } = useFirestoreDocData(dogCollection);
   const [dogNumber, setDogNumber] = useState(0);
-
   const [count, setCount] = useState(1);
 
   const handleNewDoggoClick = () => {
-
     let inter = 0;
-
     if (count < 9) {
       inter = count + 1;
     } else {
@@ -99,18 +81,7 @@ export default function ImageCard({ place, checked }: { place: any, checked: any
 
     setFactNumber(num);
   }
-
-  // useEffect(() => {
-  //   getRandomDogFact().then((res) => setFact(res));
-  // }, []);
-
-  // function handleClick(e: MouseEvent): void {
-  //   e.preventDefault();
-  //   getRandomDogFact().then((newFact) => setFact(newFact));
-  // }
-
   return (
-
     <Collapse in={checked} {...(checked ? { timeout: 1000 } : {})}>
       <Card className={classes.root}>
         <CardMedia
@@ -119,7 +90,6 @@ export default function ImageCard({ place, checked }: { place: any, checked: any
           title="Contemplative Reptile"
         />
         <CardContent>
-
           <Typography
             variant="body2"
             color="textSecondary"
@@ -130,15 +100,12 @@ export default function ImageCard({ place, checked }: { place: any, checked: any
           </Typography>
           <Button variant="contained" onClick={handleNewFactClick} className={classes.button}>
             Fact
-              </Button>
+          </Button>
           <Button variant="contained" onClick={handleNewDoggoClick} className={classes.button}>
             New Doggo
-              </Button>
+          </Button>
         </CardContent>
       </Card>
     </Collapse>
   );
 }
-
-
-
