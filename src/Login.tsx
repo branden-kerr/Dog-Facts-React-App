@@ -1,5 +1,4 @@
 import { useAuth } from "reactfire";
-import React from "react";
 import "./App.css";
 import { createStyles, makeStyles } from "@material-ui/core";
 
